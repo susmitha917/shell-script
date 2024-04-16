@@ -1,1 +1,3 @@
-This is the sample script
+#!/bin/bash
+
+echo "Hello Iam learning Devops"
