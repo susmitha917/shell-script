@@ -8,4 +8,5 @@ echo "Home directory of current user: $HOME"
 echo "Which user is rnning this script: $USER"
 echo "Hostname: $HOSTNAME"
 echo "Process ID of current shell script: $$"
+sleep 60
 echo "Process ID of last back ground command: $!"
