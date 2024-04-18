@@ -3,19 +3,17 @@
 USERID=$(id -u)
 
 VALIDATE(){
-    if [ $1 -eq 0 ]; then
-        echo "$2...SUCCESS"
-    else
-        echo "$2...FAILURE"
-        exit 1
-    fi
+    echo "Exit status: $1"
+    echo "What are you doing: $2"
 }
 
-if [ $USERID -ne 0 ]; then
-    echo "Please run script with root access."
-    exit 1
+if ( $USERID -ne 0 )
+then
+  echo "please run script with root access"
+  exit 1
 else
-    echo "You are super user"
+  echo "You are sper user"
+
 fi
 
 dnf install mysql -y
