@@ -1,25 +1,23 @@
 #!/bin/bash
 
+USERID=$(id -u)
+
 VALIDATE(){
-   if [ $1 -ne 0 ]
-   then
-        echo "$2...FAILURE"
-        exit 1
-    else
-        echo "$2...SUCCESS"
-    fi
+    echo "Exit status: $1"
+    echo "What are you doing: $2"
 }
 
 if [ $USERID -ne 0 ]
 then
-    echo "Please run this script with root access."
-    exit 1 # manually exit if error comes.
+  echo "please run script with root access"
+  exit 1
 else
-    echo "You are super user."
+  echo "You are sper user"
+
 fi
 
-dnf install mysql -y &>>$LOGFILE
-VALIDATE $? "Installing MySQL"
+dnf install mysql -y
+VALIDATE $? "Installing MYSQL"
 
-dnf install git -y &>>$LOGFILE
-VALIDATE $? "Installing Git"
+dnf install git -y
+VALIDATE $? "Installing MYSQL"
