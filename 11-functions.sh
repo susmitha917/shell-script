@@ -13,7 +13,6 @@ then
     exit 1
 else
     echo "You are sper user"
-
 fi
 
 dnf install mysql -y
