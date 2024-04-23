@@ -1,7 +1,10 @@
 #!/bin/bash
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb64efdf0b5ea730b29ddb2a39f7c166a3878e51
 USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
@@ -32,4 +35,7 @@ check_root(){
     fi
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb64efdf0b5ea730b29ddb2a39f7c166a3878e51
