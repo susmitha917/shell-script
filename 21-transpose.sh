@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Debug output
-set -x
-
 # Check if a file is provided as an argument
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <filename>"
@@ -19,28 +16,33 @@ fi
 
 # Read the header
 read -r header < "$filename"
-echo "Header: $header"
 
 # Transpose the data
 transpose_data=$(awk '
+NR==FNR {
+    if (NF > max_fields) {
+        max_fields = NF
+    }
+    next
+}
 {
     for (i = 1; i <= NF; i++) {
-        if (NR == 1) {
+        if (FNR == 1) {
             header[i] = $i
         } else {
-            data[i, NR - 1] = $i
+            data[FNR-1, i] = $i
         }
     }
 }
 END {
-    for (i = 1; i <= NF; i++) {
+    for (i = 1; i <= max_fields; i++) {
         printf "%s", header[i]
-        for (j = 1; j < NR; j++) {
-            printf " %s", data[i, j]
+        for (j = 1; j < FNR; j++) {
+            printf " %s", data[j, i]
         }
         printf "\n"
     }
-}' "$filename")
+}' "$filename" "$filename")
 
 # Print the transposed data
 echo "$transpose_data"
