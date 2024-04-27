@@ -20,6 +20,7 @@ while IFS= read -r word; do
     if [ -n "$word" ]; then
         if [[ "$word" =~ ^[a-zA-Z0-9_]+$ ]]; then
             ((word_count[$word]++))
+            echo "Debug: Counted word '$word'"
         fi
     fi
 done < "$filename"
@@ -32,4 +33,3 @@ done | sort -nrk2)
 # Display the top 5 most frequent words
 echo "Top 5 most frequent words:"
 echo "$sorted_words" | head -n 5
-
