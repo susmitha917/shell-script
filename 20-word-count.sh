@@ -16,13 +16,16 @@ fi
 
 # Count occurrences of each word and store in associative array
 declare -A word_count
-while IFS= read -r word; do
-    if [ -n "$word" ]; then
-        if [[ "$word" =~ ^[a-zA-Z0-9_]+$ ]]; then
+while IFS=' ' read -r -a words; do
+    for word in "${words[@]}"; do
+        # Remove punctuation marks from the word
+        word=$(echo "$word" | tr -d '[:punct:]')
+        # Convert the word to lowercase
+        word=$(echo "$word" | tr '[:upper:]' '[:lower:]')
+        if [ -n "$word" ]; then
             ((word_count[$word]++))
-            echo "Debug: Counted word '$word'"
         fi
-    fi
+    done
 done < "$filename"
 
 # Sort the words by count in descending order
