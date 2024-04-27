@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-filename="example.txt"
+filename="$1"
 
 # Check if the file exists
 if [ ! -f "$filename" ]; then
@@ -17,7 +17,11 @@ fi
 # Count occurrences of each word and store in associative array
 declare -A word_count
 while IFS= read -r word; do
-    ((word_count[$word]++))
+    if [ -n "$word" ]; then
+        if [[ "$word" =~ ^[a-zA-Z0-9_]+$ ]]; then
+            ((word_count[$word]++))
+        fi
+    fi
 done < "$filename"
 
 # Sort the words by count in descending order
@@ -28,3 +32,4 @@ done | sort -nrk2)
 # Display the top 5 most frequent words
 echo "Top 5 most frequent words:"
 echo "$sorted_words" | head -n 5
+
