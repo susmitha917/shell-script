@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Debug output
+set -x
+
 # Check if a file is provided as an argument
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <filename>"
@@ -16,6 +19,7 @@ fi
 
 # Read the header
 read -r header < "$filename"
+echo "Header: $header"
 
 # Transpose the data
 transpose_data=$(awk '
